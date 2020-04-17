@@ -1,0 +1,13 @@
+archive/
+py_archiv/
+inputs/archive/
+build/
+outputs*/
+run_sh/
+py/archive/
+py/__pycache__
+inputs/Lagrangian_nu/*_full
+variances_tot_orig/
+variances_tot_100/*.json
+.idea/
+*.pyc
