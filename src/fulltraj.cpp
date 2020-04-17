@@ -109,9 +109,9 @@ int main(int narg, char** args) {
     // setup all the inputs   
     std::string id;
     std::string outputPath;
-    std::string LagPath = "../inputs/Lagrangian_nu/stir2_oct8_s12.0_alpha1.25_tracer" + runIdent + ".dat";
+    std::string LagPath = "../inputs/traj_s12.0/stir_s12.0_tracer_" + runIdent + ".dat";
     std::string nuclide_library = "../inputs/nuc_actual_z50_n70";
-    std::string abundances_input = LagPath + ".inp";
+    std::string abundances_input = LagPath + ".input";
     std::string trajectory = LagPath;
     std::string reactionfile;
 
@@ -134,8 +134,7 @@ int main(int narg, char** args) {
             id += args[3];
         }
         reactionfile = PP_PATH + "variances_tot_100/json_output"+id+".json";
-//        outputPath = "../outputs_100/run_sep12_" + runIdent + "/" + id;
-        outputPath = "/mnt/gs18/scratch/users/herman67/skynet_outputs/outputs_100/run_sep12_" + runIdent + "/" + id;
+        outputPath = "../output/traj_s12.0/" + runIdent;
         std::vector<std::string> nuclide_library_vec;
         nuclide_library_vec = PostProcessing::ReadNuclidesFromFile(nuclide_library);
         std::vector<double> abundances_vec;
