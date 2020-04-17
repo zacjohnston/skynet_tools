@@ -1,0 +1,69 @@
+Requires the SkyNet libraries
+
+To compile: 
+$ mkdir build
+$ cd build
+$ cmake ../ -DSkyNet_DIR=[the location of your skynet installation]/lib/cmake/SkyNet/ 
+$ make -j4 
+
+
+
+descriptions of important files:
+
+    src/fulltraj.cpp
+        primary file of interest
+        will run the evolutions using the file inputs described therein
+        inputs and output specifications are made within the file
+
+        script runs as
+        $ ./fulltraj [tracer #] [reaction_vary_id #]
+
+        $ ./fulltraj 0 0
+        will write four files to the outputs_100 directory
+            two log files which show the skynet std output
+            two h5 files which contain all of the data
+
+            the reason there are two files for each is that fulltraj runs two separate skynet evolutions
+            the first follows the thermodynamics of the specified tracer
+            the second evolves from the end of the tracer using an adiabatic expansion 
+
+            you should be able to use the python h5py (or other standard hdf5 readers) to look at the outputs
+
+
+    src/PiecewiseProfile.hpp
+        used to read in tracer data from inputs/Lagrangian_nu
+
+    src/PostProcessing.hpp
+        used to read in nuclei and abundance data from inputs
+        also used to read in reaction vary info from variances_tot_100 json files
+
+    variances_tot_100/json_output0.json
+        a sample file used to vary reaction rates (change the multiplier)    
+        can also see src/MultiplierReactionLibrary.hpp and tests/rate_variation_test to check implementation
+        base evolutions just read in the 0.json file that doesn't change anything
+
+    traj_code/
+        contains the tracer creation tool from mwarren
+
+    inputs/
+        contains all the necessary inputs
+
+        neutrino_reaction.dat
+            used to specify neutrino reaction rates (compare with that found in SKYNET/data, 
+                this one makes a correction for weak magnetism)
+
+        nuc_actual_z50_n70
+            a list of nuclei (all z<50, n<70)
+            this is the default nuclide list for fulltraj, used to reduce the size of the skynet network
+
+        Lagrangian_nu/
+            contains all the tracer data and initial abundances
+
+    reactions_all.txt
+        used to specify the reaction ids to vary (I clipped it to only be 0,
+             since the rest are irrelevant for you)
+
+
+    py/
+        see readme in directory, you will want to run runsetup_sh.py 
+        before running any evolutions as it creates the output directories
