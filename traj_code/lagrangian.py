@@ -149,7 +149,7 @@ tstart = time1
 #  Output
 for i in range(len(mass_grid)):
     print mass_grid[i]
-    with open("../inputs/traj_s12.0/stir_s12.0_tracer_" + str(i) + ".dat", "w") as f:
+    with open("../input/traj_s12.0/stir_s12.0_tracer_" + str(i) + ".dat", "w") as f:
         # with open("./data/traj_s11.0/stir2_s11.0_alpha1.25_tracer"+str(i)+".dat","w") as file:
         f.write('mass element = ' + str(mass_grid[i]) + " M_sun\n")
         f.write(
