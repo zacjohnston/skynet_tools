@@ -3,7 +3,7 @@ archive/
 py_archiv/
 build/
 output/
-input/traj_*
+inputs/traj_*
 run_sh/
 py/archive/
 py/__pycache__
