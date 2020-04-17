@@ -1,7 +1,7 @@
+[Copied from Kirby's repo, some may not apply, need to update]
 Requires the SkyNet libraries
 
 To compile: 
-$ mkdir build
 $ cd build
 $ cmake ../ -DSkyNet_DIR=[the location of your skynet installation]/lib/cmake/SkyNet/ 
 $ make -j4 
