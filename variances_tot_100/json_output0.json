@@ -1,0 +1,23 @@
+{
+  "-n-p-d": {
+    "reactants": [
+      "n",
+      "p"
+    ],
+    "products": [
+      "d"
+    ],
+    "reactantsN": [
+      1,
+      1
+    ],
+    "productsN": [
+      1
+    ],
+    "isWeak": false,
+    "isInverse": false,
+    "isDecay": false,
+    "label": "-n-p-d",
+    "multiplier": 1.0
+  }
+}

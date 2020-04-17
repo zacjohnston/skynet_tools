@@ -7,8 +7,6 @@ inputs/traj_*
 run_sh/
 py/archive/
 py/__pycache__
-variances_tot_orig/
-variances_tot_100/*.json
 .idea/
 *.pyc
 
