@@ -166,7 +166,7 @@ std::vector<double> ReadAbundancesFromFile(std::string fname, std::vector<std::s
         abund_total = abund_total + abundance_vec[j]*mass_no[j];
     }
 
-//    std::cout.precision(100);
+    std::cout.precision(3);
     int stop_loop = 0;
     std::cout << "Sum of input compositions: " << abund_total << "\n"; 
     while( abund_total != 1  && stop_loop < 100 ){
@@ -181,7 +181,6 @@ std::vector<double> ReadAbundancesFromFile(std::string fname, std::vector<std::s
                 }
             }
         abund_total = new_total;
-        std::cout.precision(100);
         stop_loop++;
     }
     std::cout<< "Sum of final compositions: " << abund_total<<std::endl; 
