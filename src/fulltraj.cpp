@@ -47,7 +47,9 @@
 #include "EquationsOfState/NeutrinoHistoryBlackBody.hpp"
 
 int main(int narg, char** args) {
-    
+    // Model strings
+    std::string model = "traj_s12.0";
+    std::string tracer_prefix = "stir_s12.0_tracer_";
 
     std::string PP_PATH = "../"; 
     int p;
@@ -109,7 +111,7 @@ int main(int narg, char** args) {
     // setup all the inputs   
     std::string id;
     std::string outputPath;
-    std::string LagPath = "../inputs/traj_s12.0/stir_s12.0_tracer_" + runIdent + ".dat";
+    std::string LagPath = "../inputs/" + model + "/" + tracer_prefix + runIdent + ".dat";
     std::string nuclide_library = "../inputs/nuc_actual_z50_n70";
     std::string abundances_input = LagPath + ".input";
     std::string trajectory = LagPath;
@@ -134,7 +136,7 @@ int main(int narg, char** args) {
             id += args[3];
         }
         reactionfile = PP_PATH + "variances_tot_100/json_output"+id+".json";
-        outputPath = "../output/traj_s12.0/" + runIdent;
+        outputPath = "../output/" + model + "/" + runIdent;
         std::vector<std::string> nuclide_library_vec;
         nuclide_library_vec = PostProcessing::ReadNuclidesFromFile(nuclide_library);
         std::vector<double> abundances_vec;
@@ -321,16 +323,7 @@ int main(int narg, char** args) {
     
         // run evolution from end of tracer using power law profile     
         auto output2 = net2.EvolveSelfHeatingWithInitialTemperature(FinalY,tinter,tfinal,final_temp,&DensProfile2,outputPath + "_2");
-      
-      
-    
-        // code to output final abundances vs mass number
-        //    std::vector<double> finalYVsA = output.FinalYVsA();
-      /*  
-        FILE * g = fopen((outputPath + "_final_y").c_str(), "w");
-        for (unsigned int A = 0; A < finalYVsA.size(); ++A)
-          fprintf(g, "%6i  %30.20E\n", A, finalYVsA[A]);
-      */
+
     }
     return 0;
 
