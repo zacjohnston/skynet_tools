@@ -101,8 +101,7 @@ int main(int narg, char** args) {
         offset = 3*N;
         N=reacs.size()-offset;
     }
-  
-  
+
     int count = N/p;
     int remainder = N % p;
     int start, stop;
@@ -117,9 +116,11 @@ int main(int narg, char** args) {
     std::string trajectory = LagPath;
     std::string reactionfile;
 
-    // split reaction-varies amongs threads  
+    std::cout << "Loading: " << LagPath << std::endl;
+
+    // split reaction-varies amongs threads
     if (my_rank < remainder){
-        start = my_rank * (count+1) + offset; 
+        start = my_rank * (count+1) + offset;
         stop = start + count;
     } else {
         start = my_rank * count + remainder + offset;
@@ -128,21 +129,23 @@ int main(int narg, char** args) {
     for ( int i = start; i<=stop; ++i){
         if ( i == start )
             std::cout<<start<<"\t"<<stop<<std::endl;
- 
-        // get input and output files 
+
+        // get input and output files
         nid = reacs[i];
         id = std::to_string(nid);
-        if (narg > 3) { 
+        if (narg > 3) {
             id += args[3];
         }
         reactionfile = PP_PATH + "variances_tot_100/json_output"+id+".json";
         outputPath = "../output/" + model + "/" + runIdent;
+        std::cout << "Saving to: " << outputPath << std::endl;
+
         std::vector<std::string> nuclide_library_vec;
         nuclide_library_vec = PostProcessing::ReadNuclidesFromFile(nuclide_library);
         std::vector<double> abundances_vec;
         abundances_vec = PostProcessing::ReadAbundancesFromFile(abundances_input, nuclide_library_vec);
 
-        // setup the nuclei library in skynet    
+        // setup the nuclei library in skynet
         auto nuclib = NuclideLibrary::CreateFromWebnucleoXML(
             SkyNetRoot + "/data/webnucleo_nuc_v2.0.xml", nuclide_library_vec );
 
